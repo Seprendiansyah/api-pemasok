@@ -83,6 +83,15 @@ const ArrayField = ({ minLength = 1, maxLength = 30, ...args }) => {
   return fieldSet;
 }
 
+function BooleanField({ field, ...args }) {
+  const col = Field({ field, ...args });
+  col
+    .isBoolean()
+    .withMessage(`${field} harus berupa nilai true atau false`)
+    .bail();
+  return col;
+}
+
 const ObjectField = ({strict= true, ...args}) => {
   const fieldSet = Field(args);
   fieldSet.isObject({strict}).withMessage(`Invalid object`).bail()
@@ -130,5 +139,6 @@ module.exports = {
     ObjectField,
     EmailField,
     DateField,
+    BooleanField,
   },
 };
